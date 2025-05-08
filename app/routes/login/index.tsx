@@ -4,6 +4,8 @@ import Input from '../../components/form/input.jsx';
 import Button from '../../components/form/button.jsx';
 import Logo from '/LogoWhite.png'
 import { Link } from 'react-router';
+import { ToastContainer, toast } from 'react-toastify';
+
 
 export function meta({ }: Route.MetaArgs) {
   return [
@@ -14,6 +16,9 @@ export function meta({ }: Route.MetaArgs) {
 
 
 export default function Login() {
+
+  const notify = () => toast("Wow so easy!");
+
   return (
     <div className={styles.container}>
       <div className={styles.container_login}>
@@ -32,7 +37,7 @@ export default function Login() {
             <label htmlFor="password" className="items-start" >Password</label>
             <Input type="password" name="password" placeholder="Senha" className={"w-[100%]"} required />
             <Link to={"/cases"} >
-              <Button type="submit" className={"mt-[1.5rem]"} value={"Entrar"} />
+              <Button type="submit" className={"mt-[1.5rem]"} value={"Entrar"} onClick={notify}/>
             </Link>
           </form>
         </div>

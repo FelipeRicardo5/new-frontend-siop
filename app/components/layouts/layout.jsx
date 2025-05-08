@@ -4,8 +4,8 @@ import Sidebar from './sidebar';
 import { Outlet } from 'react-router';
 
 export default function Layout() {
-  const [sidebarOpen, setSidebarOpen] = useState(true); // Estado que controla se a sidebar está aberta ou fechada
-
+  const [sidebarOpen, setSidebarOpen] = useState(true);
+  
   return (
     <>
       <Header />

@@ -16,15 +16,15 @@ export default function Sidebar({ setSidebarOpen }) {
                 ${isOpen ? 'w-64 pl-4' : 'w-16 items-center'}`}>
                 <button
                     onClick={toggleSidebar}
-                    className="top-4 left-4 w-[2.5rem] z-50 bg-[#0A4A81] text-white p-2 rounded-full shadow-lg"
+                    className="top-4 left-4 w-[2.2rem] z-50 bg-[#0A4A81] active:bg-white text-white active:text-[#0A4A81] p-2 rounded-full hover:shadow-xl transition "
                 >
                     {isOpen ? <ChevronLeft size={20} /> : <ChevronRight size={20} />}
                 </button>
                 {isOpen && (
                     <div className="flex flex-col items-center">
-                        <img src={IconTeste} width={100} style={{ borderRadius: "100%" }} />
-                        <div className="gap-5 mt-10 text-black flex flex-col items-center" >
-                            <p>Dev. Sênior Felipe Ricardo</p>
+                        <img src={IconTeste} width={100} style={{ borderRadius: "100%", border: "3px solid #0A4A81" }} />
+                        <div className="gap-5 mt-5 text-black flex flex-col items-center" >
+                            <p className="font-semibold" >Dev. Sênior Felipe Ricardo</p>
                             <div className="text-white flex p-1 gap-2 w-[100px] justify-center items-center     rounded-lg bg-[#0A4A81]" >
                                 <ShieldIcon size={20} />
                                 perito
