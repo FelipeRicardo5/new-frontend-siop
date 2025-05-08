@@ -1,8 +1,4 @@
 import styles from './cases.module.css';
-import Sidebar from '../../components/layouts/sidebar';
-import Header from '../../components/layouts/header';
-import Layout from '../../components/layouts/layout.jsx'
-
 
 export default function Cases() {
     return (

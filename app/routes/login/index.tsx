@@ -3,6 +3,7 @@ import styles from './login.module.css';
 import Input from '../../components/form/input.jsx';
 import Button from '../../components/form/button.jsx';
 import Logo from '/LogoWhite.png'
+import { Link } from 'react-router';
 
 export function meta({ }: Route.MetaArgs) {
   return [
@@ -21,17 +22,19 @@ export default function Login() {
         </div>
 
         <div className={styles.container_form}>
-          <div className={styles.container_content}>
+          <div className={styles.container_content_title} >
             <h1>SIOP</h1>
-            <p>acesse o sistema com os dados fornecidos pelo administrador</p>
-            <form className={styles.form}>
-              <label htmlFor="login" class="mt-[1rem]" >Login</label>
-              <Input type="text" name="login" placeholder="Login" className={"w-[100%]"} required />
-              <label htmlFor="password" class="items-start" >Password</label>
-              <Input type="password" name="password" placeholder="Senha" className={"w-[100%]"} required />
-              <Button type="submit" className={styles.button} value={"Entrar"} />
-            </form>
+            <p>acesse com os dados fornecidos pelo administrador.</p>
           </div>
+          <form className={styles.form}>
+            <label htmlFor="login" className="mt-[1rem]" >Login</label>
+            <Input type="text" name="login" placeholder="Login" className={"w-[100%]"} required />
+            <label htmlFor="password" className="items-start" >Password</label>
+            <Input type="password" name="password" placeholder="Senha" className={"w-[100%]"} required />
+            <Link to={"/cases"} >
+              <Button type="submit" className={"mt-[1.5rem]"} value={"Entrar"} />
+            </Link>
+          </form>
         </div>
       </div>
     </div>
