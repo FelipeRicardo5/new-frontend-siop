@@ -7,6 +7,8 @@ import {
   ScrollRestoration,
 } from "react-router";
 
+import { ThemeProvider } from "../app/providers/themeContext";
+
 import type { Route } from "./+types/root";
 import "./app.css";
 
@@ -42,7 +44,11 @@ export function Layout({ children }: { children: React.ReactNode }) {
 }
 
 export default function App() {
-  return <Outlet />;
+  return (
+    <ThemeProvider>
+      <Outlet />
+    </ThemeProvider>
+  ) ;
 }
 
 export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
