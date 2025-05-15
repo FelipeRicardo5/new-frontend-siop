@@ -1,0 +1,88 @@
+.section {
+  margin-bottom: 0;
+  height: auto;
+  width: 45rem;
+  padding: 1rem 1rem;
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
+  max-width: 100%; /* Garante que não ultrapasse a tela */ 
+  box-sizing: border-box;
+}
+
+.sectionTitle {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 10px;
+  border-bottom: 2px solid #0A4A81;
+  padding-bottom: 5px;
+}
+
+.container_input {
+  display: flex;
+  gap: 30px;
+  margin-bottom: 5px;
+  flex-wrap: wrap;
+}
+
+.inputGroup {
+  flex: 1;
+  min-width: 200px;
+}
+
+/* Botões responsivos */
+.gerarPDF {
+  font-weight: bold;
+  font-size: 0.9rem;
+  padding: 10px 16px;
+  border-radius: 5px;
+  outline: none;
+  width: 15rem;
+  box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s;
+}
+
+/* Estilo específico para cada botão */
+.gerarPDF {
+  background-color: #e0e0e0;
+  color: #333;
+}
+
+/* === Responsividade === */
+@media (max-width: 1024px) {
+  
+  .section{
+    width: 18.5rem;
+  }
+  .criarCasoButton {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .container_input {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .gerarPDF {
+    width: 100%;
+  }
+
+  .section {
+    padding: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .sectionTitle {
+    font-size: 1rem;
+  }
+
+  .gerarPDF {
+    font-size: 0.85rem;
+    padding: 8px 12px;
+  }
+}

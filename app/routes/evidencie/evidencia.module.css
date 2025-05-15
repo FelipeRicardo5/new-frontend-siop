@@ -1,0 +1,157 @@
+.section {
+  margin-bottom: 0;
+  height: auto;
+  width: 45rem ;
+  padding: 1rem 1rem;
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
+  max-width: 100%; /* Garante que não ultrapasse a tela */ 
+  box-sizing: border-box;
+}
+
+.sectionTitle {
+  font-size: 1.1rem; 
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 15px;
+  border-bottom: 3px solid #0A4A81; 
+  padding-bottom: 8px; 
+}
+
+.EvidenciaButton {
+  background-color: #f0f0f0; 
+  color: #333;
+  font-weight: bold;
+  padding: 10px 15px; 
+  border-radius: 8px; 
+  outline: none;
+  width: auto; 
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+  font-size: 0.9rem;
+  cursor: pointer; 
+  transition: background-color 0.3s ease; 
+}
+
+.EvidenciaButton:hover {
+  background-color: #e0e0e0;
+}
+
+.criarpdfButton {
+  background-color: #0A4A81; 
+  color: white;
+  font-weight: semibold;
+  padding: 10px 15px; 
+  border-radius: 5px; 
+  border: none; 
+  outline: none;
+  width: auto; 
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+  font-size: 0.9rem;
+  cursor: pointer; 
+  transition: background-color 0.3s ease; 
+  margin-left: auto; 
+}
+
+.criarpdfButton:hover {
+  background-color: #083b6b;
+}
+
+.container_input {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap; 
+  margin-bottom: 15px;
+}
+
+.inputGroup {
+  flex: 1; 
+  min-width: 200px; 
+}
+
+.container_horizontal {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+}
+
+.inputGroupVertical {
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+.inputGroupVertical label {
+  display: block; 
+  margin-bottom: 5px;
+  color: #555; 
+  font-weight: bold;
+  font-size: 0.9rem;
+}
+
+.mapPlaceholder {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+
+.mapPlaceholder img {
+  display: block; 
+  width: 100%;
+  height: auto;
+}
+
+.mapPlaceholder p {
+  padding: 8px;
+  background-color: #f9f9f9; 
+  color: #777;
+  font-size: 0.85rem;
+  text-align: center;
+  border-top: 1px solid #eee; 
+}
+
+/* Estilizando os inputs e selects */
+.container_input input[type="text"],
+.container_input select,
+.inputGroupVertical textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box; 
+  font-size: 0.9rem;
+  color: #333;
+}
+
+.container_input input[type="text"]:focus,
+.container_input select:focus,
+.inputGroupVertical textarea:focus {
+  outline: none;
+  border-color: #007bff; 
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); 
+}
+
+/* Estilo específico para a área de texto maior */
+.inputGroupVertical textarea {
+  min-height: 80px; 
+}
+
+@media (max-width: 768px) {
+  .section {
+    padding: 15px;
+    width: 18.5rem;
+  }
+
+  .container_input {
+    flex-direction: column; 
+    gap: 10px;
+  }
+
+  .inputGroup {
+    min-width: auto;
+  }
+
+  .criarpdfButton {
+    margin-left: 0; 
+    margin-top: 10px; 
+  }
+}
