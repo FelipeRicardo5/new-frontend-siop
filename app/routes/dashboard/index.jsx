@@ -9,9 +9,9 @@ export default function DashBoard() {
         "name": "Casos Cadastrados",
         "quantidade": "24"
     }
-
+    
     return (
-        <div className={`flex flex-col items-start`}>
+        <div className={`flex flex-col items-start `}>
             <h1 className={`${theme === 'dark' ? '' : 'text-[#0A4A81]'} sm:text-[2rem] text-[1.5rem] font-semibold mb-[1.5rem]`} >Dashboard</h1>
             <div className={`${theme === 'dark' ? 'bg-[#212121]' : 'text-[#0A4A81] bg-white'} flex flex-col items-center h-[100dvh] min-w-[80dvw] px-[1rem] py-[2rem] border-1 border-[#ccc] rounded-[20px] shadow-2xl/30`}>
                 <section className={styles.dashboard_section}>

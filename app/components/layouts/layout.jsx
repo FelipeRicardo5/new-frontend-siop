@@ -9,7 +9,6 @@ export default function Layout() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const { theme, toggleTheme } = useTheme()
 
-
   return (
     <>
       <Header />

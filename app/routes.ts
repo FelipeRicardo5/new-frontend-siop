@@ -12,9 +12,12 @@ export default [
     layout("./components/layouts/layout.jsx", [
         route("dashboard", "routes/dashboard/index.jsx"),
         route("cases", "routes/cases/index.jsx"),
+        route("createcase", "routes/create-case/index.jsx"),
         route("reports", "routes/reports/index.jsx"),
         route("settings", "routes/settings/index.jsx"),
         route("users", "routes/users/index.jsx"),
+        route("expertreport", "routes/expertReport/index.jsx"),
+        route("evidencie", "routes/evidencie/index.jsx"),
     ]),
 
 ] satisfies RouteConfig;
