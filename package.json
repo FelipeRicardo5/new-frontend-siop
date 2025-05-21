@@ -4,12 +4,13 @@
   "type": "module",
   "scripts": {
     "build": "react-router build",
-    "dev": "react-router dev",
+    "dev": "vite --port 3030",
     "start": "react-router-serve ./build/server/index.js",
     "typecheck": "react-router typegen && tsc"
   },
   "dependencies": {
     "@react-router/node": "^7.5.3",
+    "axios": "^1.9.0",
     "chart.js": "^4.4.9",
     "isbot": "^5.1.27",
     "jspdf": "^3.0.1",

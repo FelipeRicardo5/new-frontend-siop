@@ -17,7 +17,10 @@ export default [
         route("settings", "routes/settings/index.jsx"),
         route("users", "routes/users/index.jsx"),
         route("expertreport", "routes/expertReport/index.jsx"),
-        route("evidencie", "routes/evidencie/index.jsx"),
+        route("create-evidence", "routes/create-evidence/index.jsx"),
+        route("details", "routes/details/index.jsx"),
+        route("victim/:id?", "routes/victim/index.jsx"),
+        route("details-evidence", "routes/details-evidence/index.jsx"),
     ]),
 
 ] satisfies RouteConfig;
