@@ -5,7 +5,7 @@ const GroupBySelect = ({ groupBy, setGroupBy, groupOptions }) => {
   const { theme } = useTheme();
 
   // Estilos condicionais com base no tema
-  const selectClass = `p-2 border rounded w-[200px] ${
+  const selectClass = `p-2 border rounded w-[200px] outline-none ${
     theme === 'dark' ? 'bg-[#212121] text-white border-gray-600' : 'bg-white text-black border-gray-300'
   }`;
 

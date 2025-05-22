@@ -9,6 +9,8 @@ import ChartRadar from '../../components/charts/chartRadar.jsx';
 import Input from '../../components/form/inputForm.jsx';
 import Button from '../../components/form/button.jsx';
 import GroupBySelect from '../../components/form/groupBySelect.jsx';
+import Loading from '../../../public/tube-spinner.svg'
+import Passarela from '../../components/layouts/catwalk/catwalk.jsx';
 
 export default function DashBoard() {
     const { theme } = useTheme();
@@ -16,6 +18,14 @@ export default function DashBoard() {
     const [chartData, setChartData] = useState(null);
     const [loading, setLoading] = useState(false);
     const [filters, setFilters] = useState({});
+
+    const dados = [
+        { titulo: 'Projeto A', descricao: 'Sistema de controle escolar' },
+        { titulo: 'Projeto B', descricao: 'Aplicativo de saúde' },
+        { titulo: 'Projeto C', descricao: 'Dashboard de vendas' },
+        { titulo: 'Projeto D', descricao: 'Plataforma de cursos' },
+        { titulo: 'Projeto E', descricao: 'Sistema de identificação forense' },
+      ];
 
     const groupOptions = [
         { value: 'sexo', label: 'Sexo da Vítima' },
@@ -110,16 +120,16 @@ export default function DashBoard() {
     //   };
 
     return (
-        <div className="w-full max-w-[1440px] px-4 sm:px-6 lg:px-8 m-">
+        <div className="w-full max-w-[1440px] px-4 sm:px-6 lg:px-8">
             <h1 className={`${theme === 'dark' ? '' : 'text-[#0A4A81]'} text-2xl sm:text-3xl md:text-4xl font-semibold mb-6 sm:mb-8`}>
                 Dashboard
             </h1>
 
             <div
                 className={`${theme === 'dark' ? 'bg-[#212121]' : 'bg-white'
-                    } w-full px-4 sm:px-6 py-6 sm:py-8 gap-6 sm:gap-8 border border-[#ccc] rounded-[20px] shadow-2xl`}
+                    } w-full px-4 sm:px-6 py-6 sm:py-8 gap-6 sm:gap-8 border border-[#ccc] rounded-[20px] shadow-2xl `}
             >
-                <div className="w-full max-w-2xl flex">
+                <div className="w-full flex sm:flex-row gap-4 justify-between">
                     <form onSubmit={handleSubmit} className="flex flex-col gap-4 mb-8">
                         <GroupBySelect
                             groupBy={groupBy}
@@ -136,9 +146,24 @@ export default function DashBoard() {
                         <Button
                             type="submit"
                             value="Gerar Gráfico"
-                            className="w-full sm:w-auto hover:bg-[#1d6bad] px-4 py-2 rounded-[20px]"
+                            className="w-full sm:w-auto hover:bg-[#1d6bad] px-4 py-2 rounded-[20px] border-1 border-[#1d6bad]"
                         />
                     </form>
+                    <div className=" sm:w-auto flex gap-4 flex-col ">
+                        <Button
+                            type="submit"
+                            value="Criar Caso"
+                            className="w-full sm:w-auto hover:bg-[#1d6bad] px-4 py-2 rounded-[20px] border-1 border-[#1d6bad]"
+                        />
+                        <Button
+                            value="Gerar Relatório"
+                            className="w-full sm:w-auto hover:bg-[#1d6bad] px-4 py-2 rounded-[20px] border-1 border-[#1d6bad]"
+                        />
+                        <Button
+                            value="Criar Laudo"
+                            className="w-full sm:w-auto hover:bg-[#1d6bad] px-4 py-2 rounded-[20px] border-1 border-[#1d6bad]"
+                        />
+                    </div>
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mb-8">
@@ -146,22 +171,24 @@ export default function DashBoard() {
                         <h3 className="text-base sm:text-lg md:text-xl font-semibold mb-2">Total de Registros</h3>
                         <p className="text-xl sm:text-2xl md:text-3xl font-bold">1,234</p>
                     </div>
-                    
+
                     <div className="p-4 sm:p-6 border border-gray-300 rounded-lg shadow-md bg-opacity-20 backdrop-blur-lg">
                         <h3 className="text-base sm:text-lg md:text-xl font-semibold mb-2">Média por Dia</h3>
                         <p className="text-xl sm:text-2xl md:text-3xl font-bold">42</p>
                     </div>
-                    
+
                     <div className="p-4 sm:p-6 border border-gray-300 rounded-lg shadow-md bg-opacity-20 backdrop-blur-lg">
                         <h3 className="text-base sm:text-lg md:text-xl font-semibold mb-2">Crescimento</h3>
                         <p className="text-xl sm:text-2xl md:text-3xl font-bold text-green-500">+15%</p>
                     </div>
                 </div>
-
+                <div className="w-full h-[70px]">
+                    {/* <Passarela dados={dados}/> */}
+                </div>
                 <div className="w-full">
                     {loading && (
                         <div className="flex justify-center items-center py-8">
-                            <p className="text-lg">Carregando gráfico...</p>
+                            <img src={Loading} alt="Loading" className="w-20 h-20" />
                         </div>
                     )}
                     {chartData && (
