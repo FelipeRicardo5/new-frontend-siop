@@ -1,0 +1,56 @@
+/* DetailsCases.module.css */
+.title{
+color: #0A4A81;
+font-family: Inter;
+font-size: 32px;
+font-style: normal;
+font-weight: 800;
+line-height: normal;
+height: 0;
+}
+
+.active {
+  color: #0A4A81;
+font-family: Inter;
+font-size: 14px;
+font-style: normal;
+font-weight: 600;
+line-height: normal;
+ }
+
+.body {
+    display: flex;
+    gap: 2rem;
+    margin-top: 2rem;
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+}
+
+.left, .right {
+    flex: 1;
+}
+.footer {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 2rem;
+}
+
+
+
+.ArrowRight{
+     margin-top: 20px;
+    margin-left: 900px;
+   background-color: #fff;
+}
+
+
+
+
+.button{
+    border-radius: 5px;
+background: #0A4A81;
+color: #fff;
+padding: 5px
+}
