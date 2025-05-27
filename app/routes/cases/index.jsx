@@ -1,222 +1,116 @@
-import React, { useState } from 'react';
-import { useTheme } from '../../providers/themeContext';
-import styles from './cases.module.css'; // Importe o arquivo CSS Module
-import Input from '../../components/form/inputForm'; // Adapte o caminho se necessário
+import Header from "../../components/layouts/header";
+import Sidebar from "../../components/layouts/sidebar";
+import ProfileAvatar from "../../components/layouts/profileAvatar";
+import { Trash } from "lucide-react";
+import { useState, useEffect } from "react";
+import { useTheme } from "../../providers/themeContext";
+import styles from "./cases.module.css";
+import Loading  from "../../../public/tube-spinner.svg";
 
-const CriarCasoForm = () => {
-   const { theme } = useTheme();
+export default function CasesList() {
+  const { theme } = useTheme();
+  const [sidebarOpen, setSidebarOpen] = useState(true);
+  const [cases, setCases] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  const [form, setForm] = useState({
-    identificacao: '',
-    nomeCaso: '',
-    responsavel: '',
-    local: '',
-    descricao: '',
-    data: '',
-    hora: '',
-    corPele: '',
-    sexoVitima: '',
-    causaMorte: '',
-    identificado: '', // 'Sim' ou 'Não'
-    // Adicione aqui os estados para os campos de evidência se necessário
-  });
+  useEffect(() => {
+    const fetchCases = async () => {
+      try {
+        const response = await fetch('https://backend-siop.onrender.com/api/cases');
+        const data = await response.json();
+        setCases(data);
+        setLoading(false);
+      } catch (error) {
+        console.error('Erro ao buscar casos:', error);
+        setLoading(false);
+      }
+    };
 
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-    setForm({
-      ...form,
-      [name]: value,
-    });
+    fetchCases();
+  }, []);
+
+  // Theme variables for CSS
+  const themeVars = theme === "dark"
+    ? {
+        '--cases-title-color': '#fff',
+        '--cases-bg': '#212121',
+        '--case-card-bg': '#212121',
+        '--case-title-color': '#fff',
+        '--case-address-color': '#90cdf4',
+        '--case-desc-color': '#e0e0e0',
+        '--case-link-color': '#90cdf4',
+        '--case-card-border': '#3d3d3d',
+      }
+    : {
+        '--cases-title-color': '#0A4A81',
+        '--cases-bg': '#fff',
+        '--case-card-bg': '#fff',
+        '--case-title-color': '#0A4A81',
+        '--case-address-color': '#0A4A81',
+        '--case-desc-color': '#666',
+        '--case-link-color': '#0A4A81',
+        '--case-card-border': '#ccc',
+      };
+
+  const getStatusColor = (status) => {
+    switch (status.toLowerCase()) {
+      case 'aberto':
+        return '#22c55e';
+      case 'fechado':
+        return '#dc2626';
+      case 'em análise':
+        return '#0A4A81';
+      default:
+        return '#0A4A81';
+    }
   };
 
-  const adicionarEvidencia = () => {
-    
-    console.log('Adicionar Evidência');
-  };
-
-  const criarCaso = () => {
-    // Implemente a lógica para criar o caso
-    console.log('Criar Caso:', form);
-  };
 
   return (
-   <div className={`flex flex-col items-start`}>
-
-  <h1
-    className={`${
-      theme === 'dark' ? '' : 'text-[#0A4A81]'
-    } sm:text-[2rem] text-[1.5rem] font-semibold mb-[1.5rem]`}
-  >
-    Banco Odontológico
-  </h1>
-
-  <div
-    className={`${
-      theme === 'dark' ? 'bg-[#212121]' : 'bg-white'
-    } flex flex-col w-auto px-[1rem] py-[2rem] gap-[1.5rem] border border-[#ccc] rounded-[20px] shadow-2xl`}
-  >
-        {/* Identificação e Nome do Caso */}
-        <div className={styles.section}>
-          <h2 className={styles.sectionTitle}>Dados do Caso</h2>
-          <div className={styles.container_input}>
-            <div className={styles.inputGroup}>
-              <Input
-                type="text"
-                id="responsavel"
-                name={"responsavel"}
-                value={form.responsavel}
-                onChange={handleChange}
-                placeholder=""
-              />
+    <div className={styles.casesContainer} style={themeVars}>
+      <h1 className={styles.casesTitle}>Casos em andamento</h1>
+      {loading ? (
+        <div className={styles.loadingContainer}>
+          <div> <img src={Loading} alt="Loading" width={50} height={50} /> </div>
+          <div className={styles.loadingText}>Carregando...</div>
+        </div>
+      ) : (
+        <>
+      {cases.map((c) => (
+        <div key={c._id} className={styles.caseCard}>
+          <div className={styles.cardAvatar}>
+            <img src={`https://randomuser.me/api/portraits/men/${Math.floor(Math.random() * 50)}.jpg`} alt={c.titulo} />
+          </div>
+          <div className={styles.cardContent}>
+            <div>
+              <h3 className={styles.cardName}>{c.titulo}</h3>
+              <div className={styles.cardDate}>{c.createdAt}</div>
+              <div className={styles.cardAddress}>{c.localizacao}</div>
+              <div className={styles.cardDescription}>{c.descricao}</div>
+              <div className={styles.cardResponsible}><b>Responsável:</b> {c.responsavel.nome}</div>
+              <div className={styles.cardInstitution}><b>Instituição:</b> {c.instituicao}</div>
             </div>
-            <div className={styles.inputGroup}>
-              <Input
-                type="text"
-                id="nomeCaso"
-                name={"Nome Caso"}
-                value={form.nomeCaso}
-                onChange={handleChange}
-                placeholder=""
-              />
+            <div className={styles.cardActions}>
+              <button className="hover:text-red-300 text-gray-500 duration-400 transition-colors">
+                <Trash size={20} />
+              </button>
             </div>
+          </div>
+          <div className={styles.cardSide}>
+            <span
+              className={styles.statusBadge}
+              style={{ background: getStatusColor(c.status) }}
+            >
+              {c.status}
+            </span>
+            <a href="#" className={styles.detailsLink}>
+              Ver detalhes...
+            </a>
           </div>
         </div>
-
-        {/* Local e Descrição */}
-        <div className={styles.section}>
-          <h2 className={styles.sectionTitle}>Informações do caso </h2>
-          <div className={styles.container_input}>
-            <div className={styles.inputGroup}>
-              <Input
-                type="text"
-                id="local"
-                name={"local"}
-                value={form.local}
-                onChange={handleChange}
-                placeholder=""
-              />
-            </div>
-            <div className={styles.inputGroup}>
-              <Input
-                type="text"
-                id="descricao"
-                name="descricao"
-                value={form.descricao}
-                onChange={handleChange}
-                placeholder=""
-              />
-            </div>
-          </div>
-          <div className={styles.container_input}>
-            <div className={styles.inputGroup}>
-              <Input
-                type="date"
-                id="data"
-                name={"data"}
-                value={form.data}
-                onChange={handleChange}
-              />
-            </div>
-            <div className={styles.inputGroup}>
-              <Input
-                type="time"
-                id="hora"
-                name={"hora"}
-                value={form.hora}
-                onChange={handleChange}
-              />
-            </div>
-          </div>
-        </div>
-        {/* Informações da Vítima (Selects) */}
-        <div className={styles.section}>
-          <h2 className={styles.sectionTitle}>Informações da Vítima</h2>
-          <div className={styles.container_input}>
-            <div className={styles.inputGroup}>
-              <label htmlFor="corPele" className="block text-gray-700 text-sm font-bold mb-2">
-                Cor da Pele:
-              </label>
-              <select
-                id="corPele"
-                name={"cor Pele"}
-                value={form.corPele}
-                onChange={handleChange}
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              >
-                <option value="">Selecione</option>
-                <option value="branco">Branco</option>
-                <option value="preto">Preto</option>
-                <option value="pardo">Pardo</option>
-                <option value="amarelo">Amarelo</option>
-                <option value="indigena">Indígena</option>
-                <option value="nao_declarado">Não Declarado</option>
-              </select>
-            </div>
-            <div className={styles.inputGroup}>
-              <label htmlFor="sexoVitima" className="block text-gray-700 text-sm font-bold mb-2">
-                Sexo da Vítima:
-              </label>
-              <select
-                id="sexoVitima"
-                name={"sexo Vitima"}
-                value={form.sexoVitima}
-                onChange={handleChange}
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              >
-                <option value="">Selecione</option>
-                <option value="masculino">Masculino</option>
-                <option value="feminino">Feminino</option>
-                <option value="outro">Outro</option>
-                <option value="nao_declarado">Não Declarado</option>
-              </select>
-            </div>
-            <div className={styles.inputGroup}>
-              <label htmlFor="identificado" className="block text-gray-700 text-sm font-bold mb-2">
-                Identificado:
-              </label>
-              <select
-                id="identificado"
-                name={"identificado"}
-                value={form.identificado}
-                onChange={handleChange}
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              >
-                <option value="">Selecione</option>
-                <option value="sim">Sim</option>
-                <option value="nao">Não</option>
-              </select>
-            </div>
-          </div>
-          <div className={styles.inputGroup}>
-              
-              <Input
-                type="text"
-                id="causaMorte"
-                name={"causa Morte"}
-                value={form.causaMorte}
-                onChange={handleChange}
-                placeholder=""
-              />
-            </div>
-        </div>
-
-        <button
-          onClick={adicionarEvidencia}
-          className={styles.adicionarEvidenciaButton}
-        >
-          + Adicionar Evidência
-        </button>
-
-        {/* Criar Caso */}
-        <button
-          onClick={criarCaso}
-          className={styles.criarCasoButton}
-        >
-          Criar caso
-        </button>
-      </div>
+      ))}
+      </>
+      )}
     </div>
   );
-};
-
-export default CriarCasoForm;
+}

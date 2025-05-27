@@ -27,19 +27,19 @@ export default function Settings() {
                 </div>
                 <div className={styles.container_input}>
                     <Input
-                        name={"Nome"}
+                        label={"Nome"}
                     />
                     <Input
-                        name={"Endereço"}
+                        label={"Endereço"}
                     />
                 </div>
                 <div className={styles.container_input}>
                     <Input
-                        name={"CRO"}
+                        label={"CRO"}
                         value={"SP 123456"} // Só dar um get no cro!
                     />
                     <Input
-                        name={"E-mail"}
+                        label={"E-mail"}
                     />
                 </div>
                 <div className={styles.switch}>

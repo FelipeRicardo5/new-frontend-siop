@@ -12,7 +12,7 @@ const PieChart = ({ data }) => {
         position: 'right'
       },
       title: {
-        display: true,
+        display: true,  
         // text: data.categoria
       }
     }
