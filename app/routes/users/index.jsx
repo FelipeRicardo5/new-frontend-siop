@@ -49,7 +49,7 @@ const Users = () => {
           <a href="#">Criar usuário</a>
         </button>
       </div>
-      <container className={styles.user_container}>
+      <div className={styles.user_container}>
         <div className={styles.user_box}>
           <a className={styles.text_link} href="#">
             Ver detalhes
@@ -104,7 +104,7 @@ const Users = () => {
 
           <p>Nome: Júlia martins</p>
         </div> */}
-      </container>
+      </div>
     </div>
   );
 };

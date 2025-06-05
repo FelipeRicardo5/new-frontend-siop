@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'http://localhost:3000/api';
+const API_URL = 'https://backend-siop.onrender.com/api';
 
 export const dashboardAPI = {
     // Busca estatísticas dos casos
@@ -13,7 +13,6 @@ export const dashboardAPI = {
         }
     },
 
-    // Busca dados para os gráficos
     getChartData: async (groupBy, filters) => {
         try {
             const response = await axios.post(`${API_URL}/dashboard/filtrar-casos-dinamico`, {
@@ -26,7 +25,6 @@ export const dashboardAPI = {
         }
     },
 
-    // Busca a média de idade das vítimas
     getAverageAge: async () => {
         try {
             const response = await axios.get(`${API_URL}/dashboard/media-idade`);
@@ -36,3 +34,26 @@ export const dashboardAPI = {
         }
     }
 }; 
+
+export const authAPI = {
+    
+    login: async (email, senha) => {
+        try {
+            const response = await axios.post(`${API_URL}/auth/login`, { email, senha });
+            const token = response.data.token;
+            localStorage.setItem('token', token);
+            localStorage.setItem('role', response.data.role); 
+            return token;
+        } catch (error) {
+            throw new Error('Erro ao realizar login');
+        }
+    },
+
+    
+    logout: () => {
+        localStorage.removeItem('token');
+    },
+
+    isAuthenticated: () => !!localStorage.getItem('token'),
+    getToken: () => localStorage.getItem('token')
+};

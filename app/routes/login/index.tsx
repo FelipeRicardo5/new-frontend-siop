@@ -2,46 +2,81 @@ import type { Route } from './+types';
 import styles from './login.module.css';
 import Input from '../../components/form/input.jsx';
 import Button from '../../components/form/button.jsx';
-import Logo from '/LogoWhite.png'
-import { Link } from 'react-router';
+import Logo from '/LogoWhite.png';
+import { useNavigate } from 'react-router';
 import { ToastContainer, toast } from 'react-toastify';
-
+import { useState } from 'react';
+import { authAPI } from '../../services/api'; 
+import 'react-toastify/dist/ReactToastify.css';
 
 export function meta({ }: Route.MetaArgs) {
   return [
     { title: "SIOP" },
-    { name: "Sistema de Indentificação Odontológico Pericial", content: "Página de Login para acessar o sistema" },
+    { name: "Sistema de Identificação Odontológico Pericial", content: "Página de Login para acessar o sistema" },
   ];
 }
 
-
 export default function Login() {
+  const navigate = useNavigate();
+  const [loginData, setLoginData] = useState({ email: "", senha: "" });
 
-  const notify = () => toast("Wow so easy!");
+  const handleChange = (e: any) => {
+    setLoginData({ ...loginData, [e.target.name]: e.target.value });
+  };
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    try {
+      const token = await authAPI.login(loginData.email, loginData.senha);
+      toast.success("Login realizado com sucesso!");
+      navigate("/cases");
+    } catch (error: string | any) {
+      console.error("Credenciais Inválidas!", error);
+      toast.error(error.message || "Credenciais Inválidas!");
+    }
+  };
 
   return (
     <div className={styles.container}>
       <div className={styles.container_login}>
         <div className={styles.container_logo}>
-          <img src={Logo} />
+          <img src={Logo} alt="Logo SIOP" />
         </div>
 
         <div className={styles.container_form}>
-          <div className={styles.container_content_title} >
+          <div className={styles.container_content_title}>
             <h1>SIOP</h1>
-            <p>acesse com os dados fornecidos pelo administrador.</p>
+            <p>Acesse com os dados fornecidos pelo administrador.</p>
           </div>
-          <form className={styles.form}>
-            <label htmlFor="login" className="mt-[1rem]" >Login</label>
-            <Input type="text" name="login" placeholder="Login" className={"w-[100%]"} required />
-            <label htmlFor="password" className="items-start" >Password</label>
-            <Input type="password" name="password" placeholder="Senha" className={"w-[100%]"} required />
-            <Link to={"/cases"} >
-              <Button type="submit" className={"mt-[1.5rem]"} value={"Entrar"} onClick={notify}/>
-            </Link>
+
+          <form className={styles.form} onSubmit={handleLogin}>
+            <label htmlFor="email" className="mt-[1rem]">Login</label>
+            <Input
+              type="email"
+              name="email"
+              placeholder="Email"
+              className="w-[100%]"
+              value={loginData.email}
+              onChange={handleChange}
+              required
+            />
+
+            <label htmlFor="senha">Senha</label>
+            <Input
+              type="password"
+              name="senha"
+              placeholder="Senha"
+              className="w-[100%]"
+              value={loginData.senha}
+              onChange={handleChange}
+              required
+            />
+
+            <Button type="submit" className="mt-[1.5rem]" value="Entrar" />
           </form>
         </div>
       </div>
+      <ToastContainer />
     </div>
   );
 }

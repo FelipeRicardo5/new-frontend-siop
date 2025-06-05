@@ -4,11 +4,14 @@ import { Link } from "react-router";
 import ProfileAvatar from "./profileAvatar";
 import Profile from '/public/iconTeste.png';
 import { useTheme } from "../../providers/themeContext";
+import { useNavigate } from "react-router";
 
 export default function Sidebar({ setSidebarOpen }) {
     const [isOpen, setIsOpen] = useState(false);
     const [show, setShow] = useState(false)
     const { theme, toggleTheme } = useTheme()
+    const navigate = useNavigate();
+
     const toggleSidebar = () => {
         setIsOpen(!isOpen);
         setSidebarOpen(!isOpen);
@@ -18,6 +21,16 @@ export default function Sidebar({ setSidebarOpen }) {
         const timer = setTimeout(() => setShow(true), 500); // pequeno delay 
         return () => clearTimeout(timer);
     }, []);
+
+    useEffect(() => {
+            const token = localStorage.getItem('token');
+            console.log('Token:', token);
+    }, []);
+
+    const handleLogout = () => {
+        localStorage.removeItem('token');
+        navigate('/');
+    };
 
     return (
         <aside className={`fixed top-12 left-0 h-[calc(100vh-3rem)] ${theme === 'dark' ? 'bg-[#1f1f1f] text-white' : 'bg-[#fff]'} flex flex-col pt-4 space-y-4 z-40 transition-all duration-300 ease-in-out
@@ -64,10 +77,14 @@ export default function Sidebar({ setSidebarOpen }) {
                     <Settings size={20} title="Configurações" />
                     {isOpen && <span>Configurações</span>}
                 </Link>
-                <Link to="/" className={`${theme === 'dark' ? 'hover:bg-[#373737] text-white' : 'bg-[#fff] hover:text-[#0A4A81] hover:bg-[#F4F6F6]'} flex items-center gap-3 p-2 text-[#ccc] rounded-l transition duration-300 ease-out`}>
+                <button
+                    onClick={handleLogout}
+                    className={`${theme === 'dark' ? 'hover:bg-[#373737] text-white' : 'bg-[#fff] hover:text-[#0A4A81] hover:bg-[#F4F6F6]'} flex items-center gap-3 p-2 text-[#ccc] rounded-l transition duration-300 ease-out`}
+                >
                     <LogOut size={20} title="Sair" />
                     {isOpen && <span>Sair</span>}
-                </Link>
+                </button>
+
             </nav>
         </aside>
     );

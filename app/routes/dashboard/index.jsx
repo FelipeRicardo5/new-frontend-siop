@@ -154,8 +154,8 @@ export default function DashBoard() {
             <h1 className={`${theme === 'dark' ? '' : 'text-[#0A4A81]'} text-2xl sm:text-3xl md:text-4xl font-semibold mb-6 sm:mb-8`}>
                 Dashboard
             </h1>
-
-            <div
+          
+            <div 
                 className={`${theme === 'dark' ? 'bg-[#212121]' : 'bg-white'
                     } w-full px-4 sm:px-6 py-6 sm:py-8 gap-6 sm:gap-8 border border-[#ccc] rounded-[20px] shadow-2xl `}
             >
