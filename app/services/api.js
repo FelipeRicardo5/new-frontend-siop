@@ -43,7 +43,8 @@ export const authAPI = {
             const token = response.data.token;
             localStorage.setItem('token', token);
             localStorage.setItem('role', response.data.role); 
-            return token;
+            localStorage.setItem('userId', response.data.id);
+            return response.data;
         } catch (error) {
             throw new Error('Erro ao realizar login');
         }

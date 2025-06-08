@@ -6,7 +6,7 @@ import Logo from '/LogoWhite.png';
 import { useNavigate } from 'react-router';
 import { ToastContainer, toast } from 'react-toastify';
 import { useState } from 'react';
-import { authAPI } from '../../services/api'; 
+import { authAPI } from '../../services/api';
 import 'react-toastify/dist/ReactToastify.css';
 
 export function meta({ }: Route.MetaArgs) {
@@ -24,17 +24,28 @@ export default function Login() {
     setLoginData({ ...loginData, [e.target.name]: e.target.value });
   };
 
-  const handleLogin = async (e) => {
+  const handleLogin = async (e: any) => {
     e.preventDefault();
     try {
-      const token = await authAPI.login(loginData.email, loginData.senha);
+      const response = await authAPI.login(loginData.email, loginData.senha);
+
       toast.success("Login realizado com sucesso!");
-      navigate("/cases");
+
+      const userId = response.id; // ✅ pegando diretamente da resposta
+      if (userId) {
+        setTimeout(() => {
+          navigate(`/cases`, { replace: true });
+        }
+          , 1000); // ✅ redirecionando após 1 segundo
+      } else {
+        toast.error("Usuário não encontrado após login.");
+      }
     } catch (error: string | any) {
       console.error("Credenciais Inválidas!", error);
       toast.error(error.message || "Credenciais Inválidas!");
     }
   };
+
 
   return (
     <div className={styles.container}>

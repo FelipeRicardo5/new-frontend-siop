@@ -1,20 +1,45 @@
-import styles from './CaseInfoForm.module.css';
+import { useTheme } from '../../providers/themeContext';
 
-export default function CaseInfoForm() {
+export default function CaseInfoForm({ titulo, responsavel, localizacao, causaMorte, dataCaso, instituicao, status }) {
+  const { theme } = useTheme();
+
   return (
-    <div className={styles.form}>
-      <label>Identificação: <input value="Lorem Ipsum" readOnly /></label>
-      <label>Responsável: <input value="Dra. Sam Hang-Yun" readOnly /></label>
-      <label>Local do Incidente: <input value="" /></label>
-      <label>Causa da morte: <input value="Impacto por queda" readOnly /></label>
-      <label>Data do caso: <input value="02/05/2025 20:22" readOnly /></label>
-      <label>Instituição: <input value="IML" readOnly /></label>
-      <label>Status: 
-        <select>
-          <option>Aberto</option>
-          <option>Fechado</option>
-          <option>Em Análise</option>
-        </select>
+    <div className={`grid gap-4 p-4 rounded-xl shadow-md 
+      ${theme === 'dark' ? 'bg-gray-800 text-white' : 'bg-white text-gray-900'}`}>
+      
+      <label className="flex flex-col">
+        <span className="mb-1 font-semibold">Identificação:</span>
+        <input value={titulo} readOnly className="input-style" />
+      </label>
+
+      <label className="flex flex-col">
+        <span className="mb-1 font-semibold">Responsável:</span>
+        <input value={responsavel} readOnly className="input-style" />
+      </label>
+
+      <label className="flex flex-col">
+        <span className="mb-1 font-semibold">Local do Incidente:</span>
+        <input value={localizacao} className="input-style" />
+      </label>
+
+      <label className="flex flex-col">
+        <span className="mb-1 font-semibold">Causa da morte:</span>
+        <input value={causaMorte} readOnly className="input-style" />
+      </label>
+
+      <label className="flex flex-col">
+        <span className="mb-1 font-semibold">Data do caso:</span>
+        <input value={dataCaso} readOnly className="input-style" />
+      </label>
+
+      <label className="flex flex-col">
+        <span className="mb-1 font-semibold">Instituição:</span>
+        <input value={instituicao} readOnly className="input-style" />
+      </label>
+
+      <label className="flex flex-col">
+        <span className="mb-1 font-semibold">Status:</span>
+        <input value={status} readOnly className="input-style" />
       </label>
     </div>
   );

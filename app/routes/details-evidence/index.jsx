@@ -13,18 +13,19 @@ export default function Evidencias() {
     { id: 5, tipo: 'Fotografia', descricao: 'Vítima Presumida' },
     { id: 6, tipo: 'Documento', descricao: 'Vítima Presumida' },
   ];
+  const { id } = useParams();
 
   return (
     <div className={styles.container}>
       <Sidebar />
-  <h2 className={styles.title}>Detalhes do caso,<br /><span>Marília Mendonça</span></h2>
+      <h2 className={styles.title}>Detalhes do caso,<br /><span>Marília Mendonça</span></h2>
       <main className={styles.main}>
         <header className={styles.header}>
-        
+
           <div className={styles.tabs}>
-             <Link to='/details' className={styles.active}>1 Informações Básicas</Link>
-           <Link to="/evidence"className={styles.active}>2 Evidências</Link> 
-             <Link to="/victim"className={styles.active}>3 Vitimas</Link> 
+            <Link to='/details' className={styles.active}>1 Informações Básicas</Link>
+            <Link to="/evidence" className={styles.active}>2 Evidências</Link>
+            <Link to="/victim" className={styles.active}>3 Vitimas</Link>
           </div>
           <button className={styles.button}>Adicionar Evidência</button>
         </header>
@@ -36,22 +37,22 @@ export default function Evidencias() {
               <div key={ev.id} className={styles.item}>
                 <FileText size={18} className={styles.trash} />
                 <span><strong>{ev.tipo}:</strong> {ev.descricao}</span>
-                
+
               </div>
-              
+
             ))}
-              <div className={styles.navButtons}>
-        <Link to="/details" className={styles.ArrowLeft}>
-     <ArrowLeft size={20} strokeWidth={2} />
-   </Link>
-   <Link to="/victim" className={styles.ArrowRight}>
-     <ArrowRight size={20} strokeWidth={2} />
-   </Link>
-  </div>
+            <div className={styles.navButtons}>
+              <Link to={`/details/${id}`} className={styles.ArrowLeft}>
+                <ArrowLeft size={20} strokeWidth={2} />
+              </Link>
+              <Link to="/victim" className={styles.ArrowRight}>
+                <ArrowRight size={20} strokeWidth={2} />
+              </Link>
+            </div>
           </div>
 
 
-        
+
         </section>
       </main>
     </div>

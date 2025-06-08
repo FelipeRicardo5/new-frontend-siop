@@ -9,10 +9,11 @@ export default function withRoleProtection(Component, allowedRoles = []) {
     return function ProtectedComponent(props) {
         const [isAllowed, setIsAllowed] = useState(null);
         const { theme } = useTheme();
+        let role = null;
 
         useEffect(() => {
             const token = getToken();
-            const role = getUserRole();
+            role = getUserRole();
 
             if (!token || !allowedRoles.includes(role)) {
                 setIsAllowed(false);
@@ -38,7 +39,7 @@ export default function withRoleProtection(Component, allowedRoles = []) {
                             >
                                 <h2 className="text-2xl font-bold mb-3 text-red-600">Acesso Negado</h2>
                                 <p className="mb-4 text-sm">
-                                    Você não tem permissão para acessar esta página.
+                                    {role ? `${role}s` : "Usuário"} não tem permissão para acessar esta página.
                                 </p>
                                 <button
                                     onClick={() => window.history.back()}

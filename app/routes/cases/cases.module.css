@@ -12,6 +12,39 @@
   color: var(--cases-title-color, #0A4A81);
 }
 
+.filterContainer {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.filterLabel{
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--filter-label-color, #0A4A81);
+  margin-right: 0.5rem;
+}
+
+.searchContainer{
+  margin-bottom: 2rem;
+}
+
+
+.filterSelect {
+  padding: 0.5rem;
+  border-radius: 5px;
+  border: 1px solid var(--filter-border-color, #ccc);
+  font-size: 1rem;
+  color: var(--filter-text-color, #333);
+  background: var(--filter-bg-color, #fff);
+  transition: border-color 0.3s;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+}
+
+.filterSelect:hover {
+  border-color: var(--filter-hover-border-color, #0A4A81);
+}
+
 .casesList {
   background: var(--cases-bg, #fff);
   border: 1px solid #ccc;
@@ -51,8 +84,8 @@
   padding: 0rem;
 }
 .cardAvatar img {
-  width: 100%;
   height: 100%;
+  max-width: 150px;
   object-fit: cover;
 }
 

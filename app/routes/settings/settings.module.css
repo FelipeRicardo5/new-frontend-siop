@@ -37,6 +37,18 @@
     width: 100%;
 }
 
+.loadingContainer {
+  color: var(--case-title-color, #0A4A81);
+  font-size: 1.5rem;
+  font-weight: 600;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 90%;
+  gap: 1rem;
+}
+
+
 @media (max-width: 600px) {
     .container {
         padding: 1.5rem 0.75rem;

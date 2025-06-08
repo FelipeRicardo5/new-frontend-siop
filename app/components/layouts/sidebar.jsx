@@ -11,6 +11,24 @@ export default function Sidebar({ setSidebarOpen }) {
     const [show, setShow] = useState(false)
     const { theme, toggleTheme } = useTheme()
     const navigate = useNavigate();
+    const id = localStorage.getItem('userId');
+    const [user, setUser] = useState(null);
+
+    useEffect(() => {
+        if (!id) return;
+
+        const fetchUser = async () => {
+            try {
+                const res = await fetch(`https://backend-siop.onrender.com/api/users/${id}`);
+                const data = await res.json();
+                setUser(data);
+            } catch (error) {
+                console.error('Erro ao buscar dados do usuário:', error);
+            }
+        };
+
+        fetchUser();
+    }, [id]);
 
     const toggleSidebar = () => {
         setIsOpen(!isOpen);
@@ -23,8 +41,8 @@ export default function Sidebar({ setSidebarOpen }) {
     }, []);
 
     useEffect(() => {
-            const token = localStorage.getItem('token');
-            console.log('Token:', token);
+        const token = localStorage.getItem('token');
+        console.log('Token:', token);
     }, []);
 
     const handleLogout = () => {
@@ -44,48 +62,115 @@ export default function Sidebar({ setSidebarOpen }) {
             {isOpen && (
                 <div className={`flex flex-col items-center`}>
                     <ProfileAvatar
-                        src={Profile}
+                        src={user?.profileImageUrl || Profile}
                     />
-                    <div className={`gap-5 mt-5 flex flex-col items-center ${theme === 'dark' ? 'text-white' : 'text-black'}`} >
-                        <p className="font-semibold" >Dev. Sênior Felipe Ricardo</p>
-                        <div className="text-white flex p-1 gap-2 w-[100px] justify-center items-center rounded-lg bg-linear-to-t from-[#072f52] to-[#0A4A81] shadow-lg/20" >
+                    <div className={`gap-2 mt-5 flex flex-col items-center ${theme === 'dark' ? 'text-white' : 'text-black'}`} >
+                        <p className="font-normal" ><b>usuário: </b>{user?.nome}</p>
+                        <div className="text-white flex p-1 gap-2 w-[130px] justify-center items-center rounded-lg bg-linear-to-t from-[#072f52] to-[#0A4A81] shadow-lg/20" >
                             <ShieldIcon size={20} />
-                            perito
+                            {user?.role === 'admin' ? (
+                                <span className="text-xs">Administrador</span>
+                            ) : (
+                                <span className="text-xs">Perito</span>
+                            )}
                         </div>
                     </div>
                 </div>
             )}
 
             <nav className={`flex flex-col space-y-2 text-sm`}>
-                <Link to="/dashboard" className={`${theme === 'dark' ? 'hover:bg-[#373737] text-white' : 'bg-[#fff] hover:text-[#0A4A81] hover:bg-[#F4F6F6] '} flex items-center gap-3 p-2 text-[#ccc] rounded-l transition duration-300 ease-out`}>
-                    <Home size={20} title="Painel" />
+                {!isOpen && (
+                    <Link
+                    to="/settings"
+                    >
+                        <div>
+                            <img
+                                src={user?.profileImageUrl || Profile}
+                                className="w-10 h-10 rounded-full object-cover  border-gray-500"
+                            />
+                        </div>
+                    </Link>
+                )
+                }
+                <Link
+                    to="/dashboard"
+                    className={`group ${theme === 'dark' ? 'hover:bg-[#373737] text-white' : 'bg-[#fff] hover:text-[#0A4A81] hover:bg-[#F4F6F6]'} flex items-center gap-3 p-2 text-[#ccc] rounded-l transition duration-300 ease-out relative`}
+                >
+                    <Home size={20} />
                     {isOpen && <span>Painel</span>}
+                    {!isOpen && (
+                        <span className="absolute left-16 bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap z-50">
+                            Dashboard
+                        </span>
+                    )}
                 </Link>
-                <Link to="/cases" className={`${theme === 'dark' ? 'hover:bg-[#373737] text-white' : 'bg-[#fff] hover:text-[#0A4A81] hover:bg-[#F4F6F6]'} flex items-center gap-3 p-2 text-[#ccc] rounded-l transition duration-300 ease-out`}>
-                    <FolderSearch size={20} title="Banco Odontológico" />
+
+                <Link
+                    to="/cases"
+                    className={`group ${theme === 'dark' ? 'hover:bg-[#373737] text-white' : 'bg-[#fff] hover:text-[#0A4A81] hover:bg-[#F4F6F6]'} flex items-center gap-3 p-2 text-[#ccc] rounded-l transition duration-300 ease-out relative`}
+                >
+                    <FolderSearch size={20} />
                     {isOpen && <span>Banco Odontológico</span>}
+                    {!isOpen && (
+                        <span className="absolute left-16 bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap z-50">
+                            Banco Odontológico
+                        </span>
+                    )}
                 </Link>
-                <Link to="/reports" className={`${theme === 'dark' ? 'hover:bg-[#373737] text-white' : 'bg-[#fff] hover:text-[#0A4A81] hover:bg-[#F4F6F6]'} flex items-center gap-3 p-2 text-[#ccc] rounded-l transition duration-300 ease-out`}>
-                    <NotepadText size={20} title="Relatórios" />
+
+                <Link
+                    to="/reports"
+                    className={`group ${theme === 'dark' ? 'hover:bg-[#373737] text-white' : 'bg-[#fff] hover:text-[#0A4A81] hover:bg-[#F4F6F6]'} flex items-center gap-3 p-2 text-[#ccc] rounded-l transition duration-300 ease-out relative`}
+                >
+                    <NotepadText size={20} />
                     {isOpen && <span>Relatórios</span>}
+                    {!isOpen && (
+                        <span className="absolute left-16 bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap z-50">
+                            Relatórios
+                        </span>
+                    )}
                 </Link>
-                <Link to="/users" className={`${theme === 'dark' ? 'hover:bg-[#373737] text-white' : 'bg-[#fff] hover:text-[#0A4A81] hover:bg-[#F4F6F6]'} flex items-center gap-3 p-2 text-[#ccc] rounded-l transition duration-300 ease-out`}>
-                    <UserRoundPen size={20} title="Usuários" />
+
+                <Link
+                    to="/users"
+                    className={`group ${theme === 'dark' ? 'hover:bg-[#373737] text-white' : 'bg-[#fff] hover:text-[#0A4A81] hover:bg-[#F4F6F6]'} flex items-center gap-3 p-2 text-[#ccc] rounded-l transition duration-300 ease-out relative`}
+                >
+                    <UserRoundPen size={20} />
                     {isOpen && <span>Usuários</span>}
+                    {!isOpen && (
+                        <span className="absolute left-16 bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap z-50">
+                            Usuários
+                        </span>
+                    )}
                 </Link>
-                <Link to="/settings" className={`${theme === 'dark' ? 'hover:bg-[#373737] text-white' : 'bg-[#fff] hover:text-[#0A4A81] hover:bg-[#F4F6F6]'} flex items-center gap-3 p-2 text-[#ccc] rounded-l transition duration-300 ease-out`}>
-                    <Settings size={20} title="Configurações" />
+
+                <Link
+                    to="/settings"
+                    className={`group ${theme === 'dark' ? 'hover:bg-[#373737] text-white' : 'bg-[#fff] hover:text-[#0A4A81] hover:bg-[#F4F6F6]'} flex items-center gap-3 p-2 text-[#ccc] rounded-l transition duration-300 ease-out relative`}
+                >
+                    <Settings size={20} />
                     {isOpen && <span>Configurações</span>}
+                    {!isOpen && (
+                        <span className="absolute left-16 bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap z-50">
+                            Configurações
+                        </span>
+                    )}
                 </Link>
+
                 <button
                     onClick={handleLogout}
-                    className={`${theme === 'dark' ? 'hover:bg-[#373737] text-white' : 'bg-[#fff] hover:text-[#0A4A81] hover:bg-[#F4F6F6]'} flex items-center gap-3 p-2 text-[#ccc] rounded-l transition duration-300 ease-out`}
+                    className={`group ${theme === 'dark' ? 'hover:bg-[#373737] text-white' : 'bg-[#fff] hover:text-[#0A4A81] hover:bg-[#F4F6F6]'} flex items-center gap-3 p-2 text-[#ccc] rounded-l transition duration-300 ease-out relative`}
                 >
-                    <LogOut size={20} title="Sair" />
+                    <LogOut size={20} />
                     {isOpen && <span>Sair</span>}
+                    {!isOpen && (
+                        <span className="absolute left-16 bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap z-50">
+                            Sair
+                        </span>
+                    )}
                 </button>
-
             </nav>
+
         </aside>
     );
 }

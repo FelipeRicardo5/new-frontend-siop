@@ -27,7 +27,7 @@ export default function RoleProtectedLayout({ allowedRoles = [], children }) {
           <div className="bg-white dark:bg-[#1f1f1f] p-6 rounded-lg shadow-lg max-w-sm text-center">
             <h2 className="text-xl font-bold mb-2 text-red-600">Acesso Negado</h2>
             <p className="text-sm mb-4">
-              Você não tem permissão para acessar esta página.
+              Você não tem permissão para acessar esta página
             </p>
             <button
               onClick={() => window.history.back()}

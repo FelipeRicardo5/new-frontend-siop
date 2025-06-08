@@ -1,34 +1,22 @@
-export default function DescriptionBox() {
-  const styles = {
-    descriptionWrapper: {
-      margin: '20px 0',
-      padding: '16px',
-      border: '1px solid #ccc',
-      borderRadius: '12px',
-      backgroundColor: '#f9f9f9',
-    },
-    heading: {
-      margin: '0 0 10px',
-      fontSize: '1.2rem',
-      color: '#333',
-    },
-    description: {
-      fontSize: '1rem',
-      lineHeight: '1.6',
-      color: '#555',
-      backgroundColor: '#fff',
-      padding: '12px',
-      borderRadius: '8px',
-      boxShadow: 'inset 0 0 4px rgba(0, 0, 0, 0.05)',
-      wordWrap: 'break-word',
-    },
-  };
+import { useTheme } from '../../providers/themeContext';
+
+export default function DescriptionBox({ descricao }) {
+  const { theme } = useTheme();
 
   return (
-    <div style={styles.descriptionWrapper}>
-      <h4 style={styles.heading}>Descrição:</h4>
-      <div style={styles.description}>
-        Lorem Ipsum is simply dummy text of the printing and typesetting industry...
+    <div className={`my-5 p-4 rounded-xl border 
+      ${theme === 'dark' ? 'bg-gray-800 border-gray-600' : 'bg-gray-100 border-gray-300'}`}>
+
+      <h4 className={`mb-2 text-lg font-semibold 
+        ${theme === 'dark' ? 'text-white' : 'text-gray-900'}`}>
+        Descrição:
+      </h4>
+
+      <div className={`text-base leading-relaxed p-3 rounded-lg shadow-inner break-words 
+        ${theme === 'dark' 
+          ? 'bg-gray-700 text-white' 
+          : 'bg-white text-gray-700'}`}>
+        {descricao}
       </div>
     </div>
   );
