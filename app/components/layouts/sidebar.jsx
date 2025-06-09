@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Home, Settings, LogOut, FolderSearch, NotepadText, UserRoundPen, ShieldIcon, ChevronLeft, ChevronRight } from "lucide-react";
+import { Home, Settings, LogOut, FolderSearch, NotepadText, UserRoundPen, ShieldIcon, ChevronLeft, ChevronRight, MessageCircleMoreIcon } from "lucide-react";
 import { Link } from "react-router";
 import ProfileAvatar from "./profileAvatar";
 import Profile from '/public/iconTeste.png';
@@ -81,7 +81,7 @@ export default function Sidebar({ setSidebarOpen }) {
             <nav className={`flex flex-col space-y-2 text-sm`}>
                 {!isOpen && (
                     <Link
-                    to="/settings"
+                    to="/settings" 
                     >
                         <div>
                             <img
@@ -119,14 +119,14 @@ export default function Sidebar({ setSidebarOpen }) {
                 </Link>
 
                 <Link
-                    to="/reports"
+                    to="/channels"
                     className={`group ${theme === 'dark' ? 'hover:bg-[#373737] text-white' : 'bg-[#fff] hover:text-[#0A4A81] hover:bg-[#F4F6F6]'} flex items-center gap-3 p-2 text-[#ccc] rounded-l transition duration-300 ease-out relative`}
                 >
-                    <NotepadText size={20} />
-                    {isOpen && <span>Relatórios</span>}
+                    <MessageCircleMoreIcon size={20} />
+                    {isOpen && <span>Chat</span>}
                     {!isOpen && (
                         <span className="absolute left-16 bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap z-50">
-                            Relatórios
+                            Chat
                         </span>
                     )}
                 </Link>

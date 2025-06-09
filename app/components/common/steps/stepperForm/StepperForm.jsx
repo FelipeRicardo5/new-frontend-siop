@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { CircleArrowRight, CircleArrowLeft, Check } from 'lucide-react';
 
 export default function StepperForm({
     steps,
@@ -20,13 +21,13 @@ export default function StepperForm({
     return (
         <div className="space-y-6">
             {/* Indicador de etapas */}
-            <div className="flex justify-center mb-6 mt-10 space-x-3">
+            <div className="flex justify-start mb-6 mt-10 space-x-3">
                 {steps.map((_, index) => (
                     <span
                         key={index}
-                        className={`w-8 h-8 flex items-center justify-center rounded-full text-sm font-bold border-2 ${step === index
-                                ? "bg-teal-500 text-white border-teal-500"
-                                : "text-gray-500 border-gray-300"
+                        className={`w-8 h-8 flex items-center justify-center rounded-full text-sm font-bold border-2 shadow-lg ${step === index
+                                ? "bg-[#0A4A81] text-white border-white shadow-md"
+                                : "text-gray-400 border-gray-300"
                             }`}
                     >
                         {index + 1}
@@ -34,12 +35,12 @@ export default function StepperForm({
                 ))}
                 {showFinalStep && (
                     <span
-                        className={`w-8 h-8 flex items-center justify-center rounded-full text-sm font-bold border-2 ${isLastStep
-                                ? "bg-teal-500 text-white border-teal-500"
-                                : "text-gray-500 border-gray-300"
+                        className={`w-8 h-8 flex items-center justify-center rounded-full text-sm font-bold border-2 shadow-md ${isLastStep
+                                ? "bg-[#0A4A81] text-white border-white"
+                                : "text-gray-400 border-gray-300"
                             }`}
                     >
-                        ✓
+                        <Check size={16} className="text-white" />
                     </span>
                 )}
             </div>
@@ -53,7 +54,7 @@ export default function StepperForm({
                         {finalReview}
                         <button
                             onClick={onSubmit}
-                            className="w-full bg-teal-600 text-white p-3 rounded-xl hover:bg-teal-700 transition"
+                            className="w-full bg-[#0A4A81] text-white p-3 rounded-xl hover:bg-[#0A4A81] transition"
                         >
                             Finalizar
                         </button>
@@ -61,21 +62,22 @@ export default function StepperForm({
                 )
             )}
 
-            {/* Botões de navegação */}
             <div className="flex justify-between gap-4 mt-4">
                 <button
                     onClick={goBack}
                     disabled={step === 0}
-                    className="bg-gray-400 text-white p-3 rounded-xl hover:bg-gray-500 transition disabled:opacity-30"
+                    className="bg-gray-100 text-gray-500 flex items-center p-3 rounded-full hover:bg-white transition disabled:opacity-30 shadow-lg hover:shadow-xl"
                 >
+                    <CircleArrowLeft size={20} className="inline-block mr-2 text-gray-500" />
                     Voltar
                 </button>
                 {!isLastStep && (
                     <button
                         onClick={goNext}
-                        className="bg-teal-500 text-white p-3 rounded-xl hover:bg-teal-700 transition"
+                        className="bg-[#0A4A81] text-white gap-1 flex items-center p-3 rounded-full hover:bg-[#ffffff] transition shadow-lg hover:text-[#0A4A81] hover:shadow-xl"
                     >
-                        Próximo
+                        Próximo	
+                        <CircleArrowRight size={20} className="inline-block mr-2" />
                     </button>
                 )}
             </div>

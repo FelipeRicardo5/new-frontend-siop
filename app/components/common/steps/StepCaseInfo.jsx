@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router';
+import { useTheme } from '../../../providers/themeContext'; // Import do tema
 import styles from './StepCaseInfo.module.css'; 
 import CaseInfoForm from '../../details/CaseInfoForm';
 import DescriptionBox from '../../details/DescriptionBox';
@@ -7,7 +8,24 @@ import MapBox from '../../details/MapBox';
 
 export default function StepCaseInfo() {
   const { id } = useParams();
+  const { theme } = useTheme(); // Hook de tema
   const [data, setData] = useState('');
+
+  const themeVars = theme === "dark"
+    ? {
+        '--body-bg': '#212121',
+        '--left-bg': '#2a2a2a',
+        '--right-bg': '#2a2a2a',
+        '--text-color': '#ccc',
+        '--border-color': '#333',
+      }
+    : {
+        '--body-bg': '#fff',
+        '--left-bg': '#f9f9f9',
+        '--right-bg': '#f9f9f9',
+        '--text-color': '#222',
+        '--border-color': '#ddd',
+      };
 
   useEffect(() => {
     const fetchCaseDetails = async () => {
@@ -26,7 +44,7 @@ export default function StepCaseInfo() {
   }, [id]);
 
   return (
-    <section className={styles.body}>
+    <section className={styles.body} style={themeVars}>
       <div className={styles.left}>
         <CaseInfoForm
           titulo={data.titulo}

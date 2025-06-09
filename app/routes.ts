@@ -11,7 +11,8 @@ export default [
     // Nessa configuração, seria basicamente telas onde todos podem acessar
     layout("components/layouts/assistenteLayout.jsx", [
         route("detailsCase/:id", "routes/detailsCase/index.jsx"),
-        route("chat/:id", "routes/chat/index.jsx"),
+        route("chat/:caseId", "routes/chat/index.jsx"),
+        route("channels/:id?", "routes/channelChat/index.jsx"),
         route("cases/:id?", "routes/cases/index.jsx"),
         route("reports", "routes/reports/index.jsx"),
         route("settings/:id?", "routes/settings/index.jsx"),
@@ -28,9 +29,6 @@ export default [
         route("dashboard", "routes/dashboard/index.jsx"),
         route("createcase", "routes/create-case/index.jsx"),
         route("createevidence", "routes/create-evidence/index.jsx"),
-        route("detailsevidences/:id", "routes/details-evidence/index.jsx"),
-        route("victim/:id?", "routes/victim/index.jsx"),
         route("expertreport", "routes/expertReport/index.jsx"),
-        route("details/:id", "routes/details/index.jsx"),
     ]),
 ] satisfies RouteConfig;

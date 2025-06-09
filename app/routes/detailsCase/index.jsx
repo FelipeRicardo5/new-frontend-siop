@@ -3,9 +3,11 @@ import StepperForm from '../../components/common/steps/stepperForm/StepperForm';
 import StepCaseInfo from '../../components/common/steps/StepCaseInfo';
 import StepEvidences from '../../components/common/steps/StepEvidences';
 import StepVictim from '../../components/common/steps/StepVictim';
+import { useNavigate } from 'react-router';
 
 export default function CaseStepperWrapper() {
-  const { id } = useParams();
+  const id = localStorage.getItem('userId');
+  const navigate = useNavigate();
 
   const steps = [
     { content: <StepCaseInfo id={id} /> },
@@ -15,13 +17,13 @@ export default function CaseStepperWrapper() {
 
   const finalReview = (
     <div>
-      <h2 className="text-xl font-bold mb-2">Resumo Final</h2>
+      <h2 className="text-xl font-bold mb-2">Documentação finalizada</h2>
       <p>Revise as informações antes de finalizar.</p>
     </div>
   );
 
   const handleSubmit = () => {
-    alert('Caso finalizado!');
+    navigate(`/cases/${id}`);
   };
 
   return (

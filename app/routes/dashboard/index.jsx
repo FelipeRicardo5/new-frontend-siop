@@ -13,6 +13,7 @@ import Passarela from '../../components/layouts/catwalk/catwalk.jsx';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { dashboardAPI } from '../../services/api';
+import { useNavigate } from 'react-router';
 
 export default function DashBoard() {
     const { theme } = useTheme();
@@ -26,6 +27,7 @@ export default function DashBoard() {
         growth: 0
     });
     const [averageAge, setAverageAge] = useState(0);
+    const navigate = useNavigate();
 
     const groupOptions = [
         { value: 'vitima.sexo', label: 'Sexo da Vítima' },
@@ -66,11 +68,14 @@ export default function DashBoard() {
         }
     };
 
-    // Buscar estatísticas ao montar o componente
     useEffect(() => {
         fetchCaseStats();
         fetchAverageAge();
     }, []);
+
+    const createCase = () => {
+        navigate('/createCase');
+    };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -184,6 +189,7 @@ export default function DashBoard() {
                             type="submit"
                             value="Criar Caso"
                             className="w-full sm:w-auto hover:bg-[#1d6bad] px-4 py-2 rounded-[20px] border-1 border-[#1d6bad]"
+                            onClick={createCase}
                         />
                         <Button
                             value="Gerar Relatório"

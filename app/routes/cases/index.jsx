@@ -1,13 +1,9 @@
-import Header from "../../components/layouts/header";
-import Sidebar from "../../components/layouts/sidebar";
-import ProfileAvatar from "../../components/layouts/profileAvatar";
 import { Trash } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useTheme } from "../../providers/themeContext";
 import styles from "./cases.module.css";
 import Loading from "../../../public/tube-spinner.svg";
 import Search from "../../components/form/search";
-import { useParams } from "react-router";
 import { useMemo } from "react";
 import noPicture from "../../../public/nopicture.png";
 import { Link } from "react-router";
@@ -179,7 +175,7 @@ export default function CasesList() {
                   {c.status}
                 </span>
                 <Link
-                to={`/details/${c._id}`}
+                to={`/detailsCase/${c._id}`}
                 >
                   <a href="#" className={styles.detailsLink}>
                     Ver detalhes...

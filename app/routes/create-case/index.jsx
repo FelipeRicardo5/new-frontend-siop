@@ -3,6 +3,7 @@ import { useTheme } from '../../providers/themeContext';
 import styles from './cases.module.css'; // Importe o arquivo CSS Module
 import Input from '../../components/form/inputForm'; // Adapte o caminho se necessário
 import { useNavigate } from 'react-router';
+import Tippy from '@tippyjs/react';
 
 const CriarCasoForm = () => {
   const { theme } = useTheme();
@@ -37,7 +38,6 @@ const CriarCasoForm = () => {
   };
 
   const criarCaso = () => {
-    // Implemente a lógica para criar o caso
     console.log('Criar Caso:', form);
   };
 
@@ -55,7 +55,6 @@ const CriarCasoForm = () => {
         className={`${theme === 'dark' ? 'bg-[#212121]' : 'bg-white'
           } flex flex-col w-auto px-[1rem] py-[2rem] gap-[1.5rem] border border-[#ccc] rounded-[20px] shadow-2xl`}
       >
-        {/* Identificação e Nome do Caso */}
         <div className={styles.section}>
           <h2 className={styles.sectionTitle}>Dados do Caso</h2>
           <div className={styles.container_input}>
@@ -66,7 +65,7 @@ const CriarCasoForm = () => {
                 name={"responsavel"}
                 value={form.responsavel}
                 onChange={handleChange}
-                placeholder=""
+                placeholder={"Título do caso"}
               />
             </div>
             <div className={styles.inputGroup}>
@@ -76,13 +75,12 @@ const CriarCasoForm = () => {
                 name={"Nome Caso"}
                 value={form.nomeCaso}
                 onChange={handleChange}
-                placeholder=""
+                placeholder={"Instituição"}
               />
             </div>
           </div>
         </div>
 
-        {/* Local e Descrição */}
         <div className={styles.section}>
           <h2 className={styles.sectionTitle}>Informações do caso </h2>
           <div className={styles.container_input}>
@@ -93,7 +91,8 @@ const CriarCasoForm = () => {
                 name={"local"}
                 value={form.local}
                 onChange={handleChange}
-                placeholder=""
+                placeholder="Onde ocorreu o caso?"
+                tooltip={"Informe o local onde ocorreu o caso."}
               />
             </div>
             <div className={styles.inputGroup}>
@@ -103,7 +102,8 @@ const CriarCasoForm = () => {
                 name="descricao"
                 value={form.descricao}
                 onChange={handleChange}
-                placeholder=""
+                placeholder="Causa da morte"
+                tooltip={"Caso ja possua uma causa de morte, informe aqui."}
               />
             </div>
           </div>
@@ -128,7 +128,6 @@ const CriarCasoForm = () => {
             </div>
           </div>
         </div>
-        {/* Informações da Vítima (Selects) */}
         <div className={styles.section}>
           <h2 className={styles.sectionTitle}>Informações da Vítima</h2>
           <div className={styles.container_input}>
@@ -136,21 +135,23 @@ const CriarCasoForm = () => {
               <label htmlFor="corPele" className="block text-gray-700 text-sm font-bold mb-2">
                 Cor da Pele:
               </label>
-              <select
-                id="corPele"
-                name={"cor Pele"}
-                value={form.corPele}
-                onChange={handleChange}
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              >
-                <option value="">Selecione</option>
-                <option value="branco">Branco</option>
-                <option value="preto">Preto</option>
-                <option value="pardo">Pardo</option>
-                <option value="amarelo">Amarelo</option>
-                <option value="indigena">Indígena</option>
-                <option value="nao_declarado">Não Declarado</option>
-              </select>
+              <Tippy content={"dddd"} placement="right" delay={[300, 0]}>
+                <select
+                  id="corPele"
+                  name={"cor Pele"}
+                  value={form.corPele}
+                  onChange={handleChange}
+                  className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                >
+                  <option value="">Selecione</option>
+                  <option value="branco">Branco</option>
+                  <option value="preto">Preto</option>
+                  <option value="pardo">Pardo</option>
+                  <option value="amarelo">Amarelo</option>
+                  <option value="indigena">Indígena</option>
+                  <option value="nao_declarado">Não Declarado</option>
+                </select>
+              </Tippy>
             </div>
             <div className={styles.inputGroup}>
               <label htmlFor="sexoVitima" className="block text-gray-700 text-sm font-bold mb-2">
@@ -207,7 +208,6 @@ const CriarCasoForm = () => {
           + Adicionar Evidência
         </button>
 
-        {/* Criar Caso */}
         <button
           onClick={criarCaso}
           className={styles.criarCasoButton}
@@ -215,7 +215,7 @@ const CriarCasoForm = () => {
           Criar caso
         </button>
       </div>
-    </div>
+    </div >
   );
 };
 

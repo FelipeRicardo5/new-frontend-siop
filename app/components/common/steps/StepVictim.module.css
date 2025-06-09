@@ -1,106 +1,92 @@
-/* DetailsCases.module.css */
-.container {
-    padding: 2rem; 
-    font-family: sans-serif; }
-
-.header { 
-    display: flex; 
-    justify-content: space-between; 
-}
-.title{
-color: #0A4A81;
-font-family: Inter;
-font-size: 32px;
-font-style: normal;
-font-weight: 800;
-line-height: normal;
+.stepContainer {
+  padding: 2rem;
+  font-family: sans-serif;
+  background-color: var(--body-bg, #000) ;
+  border-radius: 10px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
 }
 
-.tabs { 
-    display: flex; 
-    gap: 1rem; 
-    margin-top: 1rem; 
-    color: #0A4A81
-}
- 
-.active { 
-  color: #0A4A81;
-font-family: Inter;
-font-size: 14px;
-font-style: normal;
-font-weight: 600;
-line-height: normal;
- }
-
-.body { 
-    display: flex; 
-    gap: 2rem; 
-    margin-top: 2rem;
-    background-color: #fff;
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+.header {
+  margin-bottom: 1rem;
 }
 
-.left, .right { 
-    flex: 1; 
-}
-.footer { 
-    display: flex; 
-    justify-content: space-between; 
-    margin-top: 2rem; 
-}
-
-
-
-.ArrowRight{
-     margin-top: 15px;
-    margin-left: 900px;
-   background-color: #fff;
+.title {
+  color: var(--title-color, #0A4A81);
+  font-family: 'Inter', sans-serif;
+  font-size: 32px;
+  font-weight: 400;
+  line-height: normal;
 }
 
-.ArrowLeft, .ArrowRight{
-    margin-top: 30px;
-     display: flex;
-  align-items: center;
-  justify-content: center;
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  /* Adicione altura e largura para manter o alinhamento */
-  width: 40px;
-  height: 40px;
-   background-color: #0A4A81;
-    padding: 10px;
-    color: #fff;
+.body {
+  display: flex;
+  gap: 2rem;
+  margin-top: 1rem;
+  background-color: var(--body-bg, #fff);
+
 }
 
-.button{
-    border-radius: 5px;
-background: #0A4A81;
-color: #fff;
-padding: 5px
+/* Colunas esquerda e direita */
+.left, .right {
+  flex: 1;
+  background-color: var(--body-bg, #fff);
 }
 
-.cardImageBody{
-     margin-left: 370px;
-     margin-top: 20px;
-     width: 268px;
-height: 341px;
-}
-
-.cardImageTooth{
-     margin-left: 370px;
-     margin-top: 20px;
-  width: 348px;
-height: 267px;
-}
-
+/* Ajuste mapa */
 .mapa {
-  width: 180%;
+  width: 100%;
   max-width: 900px;
   height: 300px;
   border-radius: 10px;
   overflow: hidden;
   margin-top: 1rem;
+}
+
+/* Imagens dos diagramas */
+.cardImageBody {
+  display: block;
+  margin: 20px auto 0 auto;
+  max-width: 100%;
+  height: auto;
+  width: 268px;
+  height: 341px;
+}
+
+.cardImageTooth {
+  display: block;
+  margin: 20px auto 0 auto;
+  max-width: 100%;
+  height: auto;
+  width: 348px;
+  height: 267px;
+}
+
+/* Responsividade */
+@media (max-width: 900px) {
+  .body {
+    flex-direction: column;
+  }
+
+  .cardImageBody, .cardImageTooth {
+    margin-left: auto;
+    margin-right: auto;
+    width: 70%;
+    height: auto;
+  }
+
+  .mapa {
+    width: 100%;
+    height: 250px;
+  }
+}
+
+@media (max-width: 480px) {
+  .title {
+    font-size: 24px;
+    text-align: center;
+  }
+
+  .cardImageBody, .cardImageTooth {
+    width: 100%;
+  }
 }
